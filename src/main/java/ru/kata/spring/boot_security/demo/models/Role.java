@@ -11,7 +11,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String roleName;
 
     @ManyToMany
     @JoinTable(
@@ -31,12 +31,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String name) {
+        this.roleName = name;
     }
 
     public List<User> getUsers() {
@@ -51,7 +51,7 @@ public class Role {
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + roleName + '\'' +
                 '}';
     }
 }
