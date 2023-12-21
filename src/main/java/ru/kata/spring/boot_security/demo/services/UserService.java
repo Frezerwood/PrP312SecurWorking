@@ -15,29 +15,25 @@ import javax.persistence.PersistenceContext;
 
 
 @Service
-public class UserService implements  UserDetailsService{
+public class UserService implements UserDetailsService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+
+        User user = userRepository.findByFirstName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
-
-//    @PersistenceContext
-//    private EntityManager entityManager;
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Autowired
-//    private RoleRepository roleRepository;
-
-//    @Override
-//    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-//        User user = userRepository.findByUsername(firstName);
-//
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//
-//        return user;
-//    }
 }

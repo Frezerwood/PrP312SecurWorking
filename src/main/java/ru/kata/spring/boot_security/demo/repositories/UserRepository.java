@@ -10,12 +10,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    // Optional<User> findByFirstName(String s);
 
-    @Override
-    Optional<User> findById(Long aLong);
+    User findByFirstName(String username);
 
-    Optional<User> findByFirstName(String s);
-
-    //User findUserByUsername(String firstName);
-    //User findByUsername(String s);
 }
