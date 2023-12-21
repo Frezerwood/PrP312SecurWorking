@@ -20,6 +20,8 @@ public class User {
 
     private String email;
 
+    private String password;
+
     @ManyToMany
     @JoinTable(
             name = "User_Role",
@@ -29,6 +31,8 @@ public class User {
 
     public User() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -76,6 +80,14 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
