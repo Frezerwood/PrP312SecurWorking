@@ -10,8 +10,19 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+<<<<<<< HEAD
     // Optional<User> findByFirstName(String s);
 
     User findByFirstName(String username);
 
+=======
+
+    @Override
+    Optional<User> findById(Long aLong);
+
+    Optional<User> findByFirstName(String s);
+
+    //User findUserByUsername(String firstName);
+    //User findByUsername(String s);
+>>>>>>> prp312secur/master
 }
