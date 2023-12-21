@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 
 @Service
-<<<<<<< HEAD
+
 public class UserService implements UserDetailsService {
 
     @PersistenceContext
@@ -37,31 +37,5 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
-=======
-public class UserService implements  UserDetailsService{
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Autowired
-//    private RoleRepository roleRepository;
-
-//    @Override
-//    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-//        User user = userRepository.findByUsername(firstName);
-//
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//
-//        return user;
-//    }
->>>>>>> prp312secur/master
 }
