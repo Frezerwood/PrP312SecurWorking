@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 
 @Service
@@ -37,5 +38,22 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
+
+    public List<User> allUsers() {
+        return userRepository.findAll();
+    }
+
+    public boolean deleteUser(Long userId) {
+        if (userRepository.findById(userId).isPresent()) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
+
+//    public List<User> usergtList(Long idMin) {
+//        return entityManager.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
+//                .setParameter("paramId", idMin).getResultList();
+//    }
 
 }
