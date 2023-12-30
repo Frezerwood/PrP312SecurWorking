@@ -36,7 +36,6 @@ public class AdminController {
     public String createUserForm(Model model, User user) {
         model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("user", user);
-
         return "/registration";
     }
 
@@ -49,12 +48,13 @@ public class AdminController {
     @GetMapping("/updateUser")
     public String updateUserForm(@RequestParam(name = "id") Long id, Model model) {
         User user = userService.findById(id);
+        model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("user", user);
         return "/update_user";
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@ModelAttribute("user") User user) {
+    public String updateUser( @ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }

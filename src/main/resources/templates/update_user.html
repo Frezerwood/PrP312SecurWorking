@@ -34,14 +34,23 @@
         </div>
         <div class="mb-3">
             <label for="age">E-mail</label>
-            <input type="text" th:field="*{email}" id="email" placeholder="Age">
+            <input type="text" th:field="*{email}" id="email" placeholder="E-mail">
         </div>
         <div class="mb-3">
             <label for="age">Password</label>
-            <input type="text" th:field="*{password}" id="password" placeholder="Age">
+            <input type="text" th:field="*{password}" id="password" placeholder="Password">
         </div>
 
+        <div>
 
+            <input type="checkbox" name="roles"
+                   th:each="role : ${roles}"
+                   th:text="${role.name.substring(5)}"
+                   th:value="${role.id}"
+                   th:field="*{roles}"
+            />
+            <!--            <label th:for="${role}" th:text="${role.name.substring(5)}">Role name</label>-->
+        </div>
 
 
         <input type="submit" value="Update User">
