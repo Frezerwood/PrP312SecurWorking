@@ -24,6 +24,7 @@
             <th>Age</th>
             <th>Email</th>
             <th>Psssword</th>
+            <th>Role(s)</th>
         </tr>
         </thead>
         <tbody>
@@ -34,13 +35,14 @@
             <td th:text="${user.age}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.password}"></td>
-            <td><a th:href="@{user-update(id=${user.id})}">Edit</a></td>
-            <td><a th:href="@{delete(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+            <td th:text="${user.getRoles()}" ></td>
+            <td><a th:href="@{admin/updateUser(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{admin/delete(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
         </tr>
         </tbody>
     </table>
     <br>
-    <form action="#" th:action="@{/createUser}" method="get">
+    <form action="#" th:action="@{/admin/createUser}" method="get">
         <input type="submit" value="Register new User"/>
     </form>
     <br>

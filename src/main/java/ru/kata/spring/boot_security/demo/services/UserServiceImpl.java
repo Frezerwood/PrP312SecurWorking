@@ -3,10 +3,9 @@ package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
@@ -35,7 +34,6 @@ public class UserServiceImpl implements UserService {
 //    BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -58,14 +56,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-        user.setRoles(Collections.singletonList(new Role(2L, "ROLE_USER")));
-        return userRepository.save(user);
+    @Transactional
+    public void saveUser(User user) {
+        //user.setRoles(Collections.singletonList(new Role(2L, "ROLE_USER")));
+
+        userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override

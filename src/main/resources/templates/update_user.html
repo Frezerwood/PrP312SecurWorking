@@ -15,7 +15,11 @@
 </head>
 <body>
 <div class="form">
-    <form action="#" th:action="@{/admin/createUser}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/admin/updateUser}" th:object="${user}" method="post">
+        <div class="mb-3">
+            <label for="id">ID</label>
+            <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+        </div>
         <div class="mb-3">
             <label for="name">Name</label>
             <input type="text" th:field="*{firstName}" id="name" placeholder="Name">
@@ -29,21 +33,19 @@
             <input type="text" th:field="*{age}" id="age" placeholder="Age">
         </div>
         <div class="mb-3">
-            <label for="email">E-mail</label>
-            <input type="text" th:field="*{email}" id="email" placeholder="Email">
+            <label for="age">E-mail</label>
+            <input type="text" th:field="*{email}" id="email" placeholder="Age">
         </div>
         <div class="mb-3">
-            <label for="password">Password</label>
-            <input type="text" th:field="*{password}" id="password" placeholder="Password">
+            <label for="age">Password</label>
+            <input type="text" th:field="*{password}" id="password" placeholder="Age">
         </div>
-        <br/>
-        <div th:each="role : ${roles}">
-            <input th:id="${role}" type="checkbox" name="role" th:value="${role}" >
-            <label th:for="${role}" th:text="${role.name.substring(5)}">Role name</label>
-        </div>
-        <input type="submit" value="Create User">
+
+
+
+
+        <input type="submit" value="Update User">
     </form>
 </div>
 </body>
 </html>
-<!--th:checked="${role == user.getRoles()}"-->

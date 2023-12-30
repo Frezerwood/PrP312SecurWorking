@@ -4,12 +4,17 @@ package ru.kata.spring.boot_security.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
+import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -18,6 +23,9 @@ public class AdminController {
     @Autowired
     UserServiceImpl userService;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
@@ -25,12 +33,28 @@ public class AdminController {
     }
 
     @GetMapping("/createUser")
-    public String createUserForm(){
+    public String createUserForm(Model model, User user) {
+        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("user", user);
+
         return "/registration";
     }
 
     @PostMapping("/createUser")
-    public String regisrationUser(User user) {
+    public String registrationUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/updateUser")
+    public String updateUserForm(@RequestParam(name = "id") Long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "/update_user";
+    }
+
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }
@@ -40,5 +64,4 @@ public class AdminController {
         userService.deleteById(id);
         return "redirect:/admin";
     }
-
 }
