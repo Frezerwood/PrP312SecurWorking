@@ -40,7 +40,7 @@ public class UserPopulator implements ApplicationRunner {
         role.setName("ROLE_ADMIN");
         roleRepository.save(role);
 
-        user.setRoles(Collections.singletonList(role));
+        user.setRoles(Collections.singleton(role));
         userRepository.save(user);
 
 
@@ -53,7 +53,7 @@ public class UserPopulator implements ApplicationRunner {
         roleU.setName("ROLE_USER");
         roleRepository.save(roleU);
 
-        userU.setRoles(Collections.singletonList(roleU));
+        userU.setRoles(Collections.singleton(roleU));
         userRepository.save(userU);
     }
 }
