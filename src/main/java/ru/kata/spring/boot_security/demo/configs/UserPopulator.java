@@ -10,17 +10,13 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 @Component
 public class UserPopulator implements ApplicationRunner {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -36,18 +32,29 @@ public class UserPopulator implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         User user = new User();
-        user.setFirstName("admin");
-        user.setLastName("adminl");
+        user.setLastName("admin");
         user.setPassword(bCryptPasswordEncoder.encode("admin"));
         userRepository.save(user);
 
-        // Add roles for the user
         Role role = new Role();
         role.setName("ROLE_ADMIN");
         roleRepository.save(role);
 
         user.setRoles(Collections.singletonList(role));
         userRepository.save(user);
+
+
+        User userU = new User();
+        userU.setLastName("user");
+        userU.setPassword(bCryptPasswordEncoder.encode("user"));
+        userRepository.save(userU);
+
+        Role roleU = new Role();
+        roleU.setName("ROLE_USER");
+        roleRepository.save(roleU);
+
+        userU.setRoles(Collections.singletonList(roleU));
+        userRepository.save(userU);
     }
 }
 
