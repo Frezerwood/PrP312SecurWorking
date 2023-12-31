@@ -16,7 +16,7 @@ import java.security.Principal;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
     @GetMapping
