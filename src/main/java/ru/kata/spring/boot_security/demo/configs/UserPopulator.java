@@ -36,8 +36,8 @@ public class UserPopulator implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         User user = new User();
-        user.setLastName("admin");
         user.setFirstName("admin");
+        user.setLastName("adminl");
         user.setPassword(bCryptPasswordEncoder.encode("admin"));
         userRepository.save(user);
 
