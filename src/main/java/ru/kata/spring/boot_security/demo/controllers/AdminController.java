@@ -6,18 +6,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
+import ru.kata.spring.boot_security.demo.services.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
+
+//    @Autowired
+//    private RoleRepository roleRepository;
+
+    private final RoleServiceImpl roleService;
 
     @Autowired
-    private RoleRepository roleRepository;
+    public AdminController(UserServiceImpl userService, RoleServiceImpl roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     @GetMapping
     public String userList(Model model) {
@@ -27,7 +34,7 @@ public class AdminController {
 
     @GetMapping("/createUser")
     public String createUserForm(Model model, User user) {
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
         return "/registration";
     }
@@ -41,7 +48,7 @@ public class AdminController {
     @GetMapping("/updateUser")
     public String updateUserForm(@RequestParam(name = "id") Long id, Model model) {
         User user = userService.findById(id);
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
         return "/update_user";
     }
