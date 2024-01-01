@@ -15,9 +15,6 @@ public class AdminController {
 
     private final UserServiceImpl userService;
 
-//    @Autowired
-//    private RoleRepository roleRepository;
-
     private final RoleServiceImpl roleService;
 
     @Autowired
