@@ -31,30 +31,22 @@ public class UserPopulator implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        userMaker("admin","admin","ROLE_ADMIN");
+        userMaker("user","user","ROLE_USER");
+    }
+
+    private void userMaker (String name, String pass, String roleName){
         User user = new User();
-        user.setLastName("admin");
-        user.setPassword(bCryptPasswordEncoder.encode("admin"));
+        user.setLastName(name);
+        user.setPassword(bCryptPasswordEncoder.encode(pass));
         userRepository.save(user);
 
         Role role = new Role();
-        role.setName("ROLE_ADMIN");
+        role.setName(roleName);
         roleRepository.save(role);
 
         user.setRoles(Collections.singleton(role));
         userRepository.save(user);
-
-
-        User userU = new User();
-        userU.setLastName("user");
-        userU.setPassword(bCryptPasswordEncoder.encode("user"));
-        userRepository.save(userU);
-
-        Role roleU = new Role();
-        roleU.setName("ROLE_USER");
-        roleRepository.save(roleU);
-
-        userU.setRoles(Collections.singleton(roleU));
-        userRepository.save(userU);
     }
 }
 
