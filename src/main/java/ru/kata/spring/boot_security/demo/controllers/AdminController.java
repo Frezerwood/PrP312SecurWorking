@@ -28,33 +28,34 @@ public class AdminController {
     @GetMapping
     public String userList(Model model, Principal principal) {
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("userAuthority",userService.findByUsername(principal.getName()));
+        model.addAttribute("userAuthority", userService.findByUsername(principal.getName()));
         return "/admin/index";
     }
 
-    @GetMapping("/createUser")
+    @GetMapping("/new")
     public String createUserForm(Model model, User user) {
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
-        return "/registration";
+        return "/admin/new";
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/new")
     public String registrationUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/admin";
+        return "redirect:/admin/index";
     }
 
-    @GetMapping("/updateUser")
+
+    @GetMapping("/edit")
     public String updateUserForm(@RequestParam(name = "id") Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
-        return "/update_user";
+        return "/edit";
     }
 
-    @PostMapping("/updateUser")
-    public String updateUser( @ModelAttribute("user") User user) {
+    @PostMapping("")
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }

@@ -15,12 +15,17 @@
 <form th:method="POST" th:action="@{/admin}" th:object="${user}">
 
     <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
+    <input type="text" th:field="*{firstName}" id="name"/>
 
     <br/>
 
     <label for="surname">Enter surname: </label>
-    <input type="text" th:field="*{surname}" id="surname"/>
+    <input type="text" th:field="*{lastName}" id="surname"/>
+
+    <br/>
+
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
 
     <br/>
 
