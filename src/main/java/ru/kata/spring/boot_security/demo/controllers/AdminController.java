@@ -34,17 +34,17 @@ public class AdminController {
         return "admin-panel";
     }
 
-    @GetMapping("/new")
-    public String createUserForm(Model model, User user) {
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("user", user);
-        return "/admin/new";
-    }
+//    @GetMapping("/new")
+//    public String createUserForm(Model model, User user) {
+//        model.addAttribute("roles", roleService.findAll());
+//        model.addAttribute("user", user);
+//        return "/admin/new";
+//    }
 
-    @PostMapping("/new")
+    @PostMapping("/add")
     public String registrationUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/admin/index";
+        return "redirect:/admin";
     }
 
 
@@ -62,8 +62,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam(name = "id") Long id) {
+//    @GetMapping("/delete")
+//    public String deleteUser(@RequestParam(name = "id") Long id) {
+//        userService.deleteById(id);
+//        return "redirect:/admin";
+//    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
