@@ -13,26 +13,23 @@
 </head>
 <body>
 
-<div class="container-fluid bg-dark m-0 p-0">
-    <div class="row m-0 p-2 ">
-        <div class="col-11 text-white">
-            <span class="h5">
-                <th:block
-                        th:text="${userAuth.lastName}">
-                </th:block>
+<header>
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="container-fluid text-white">
+            <span class="navbar-header">
+                <span th:text="${user.getLastName()}"></span>
+                <span> with roles: </span>
+                <span th:text="' '+ ${user.getRoles()}">
+                </span>
             </span>
-            <span class="font-weight-light">
-                <th:block
-                        th:text="'with roles: '+ ${userAuth.getRoles()}">
-                </th:block>
-            </span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
         </div>
-        <div class="col-1 text-white">
-            <a class="btn-link text-secondary" type="submit" href="/logout">Logout</a>
-        </div>
-    </div>
-</div>
-
+    </nav>
+</header>
 <br>
 
 <div class="d-flex align-items-start">
@@ -66,12 +63,12 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td th:text="${userAuth.getId}"></td>
-                                <td th:text="${userAuth.getFirstName()}"></td>
-                                <td th:text="${userAuth.getLastName()}"></td>
-                                <td th:text="${userAuth.getAge()}"></td>
-                                <td th:text="${userAuth.getEmail()}"></td>
-                                <td th:text="${userAuth.getRoles()}"></td>
+                                <td th:text="${user.getId}"></td>
+                                <td th:text="${user.getFirstName()}"></td>
+                                <td th:text="${user.getLastName()}"></td>
+                                <td th:text="${user.getAge()}"></td>
+                                <td th:text="${user.getEmail()}"></td>
+                                <td th:text="${user.getRoles()}"></td>
                             </tr>
                             </tbody>
                         </table>

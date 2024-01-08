@@ -11,24 +11,26 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container-fluid bg-dark m-0 p-0">
-  <div class="row m-0 p-2 ">
-    <div class="col-11 text-white">
-            <span class="h5">
-                <th:block
-                        th:text="${user.getEmail()}">
-                </th:block>
+
+<header>
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="container-fluid text-white">
+            <span class="navbar-header">
+                <span th:text="${user.getLastName()}"></span>
+                <span> with roles: </span>
+                <span th:each="role : ${roleList}"
+                      th:text="${role.name.substring(5) + '  '}">
+                </span>
             </span>
-      <span class="font-weight-light">
-                <th:block
-                        th:text="'with roles: '+ ${user.getRoles()}">
-                </th:block>
-            </span>
-    </div>
-    <div class="col-1 text-white">
-      <a class="btn-link text-secondary" type="submit" href="/logout">Logout</a>
-    </div>
-  </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
 </div> <!--Шапка с Email, Ролями и кнопкой Logout -->
 <br>
 <div class="d-flex align-items-start">
