@@ -25,11 +25,13 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping
-    public String userList(Model model, Principal principal) {
+    @GetMapping(value = "")
+    public String showAdminPanel(Model model, Principal principal) {
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("userAuthority", userService.findByUsername(principal.getName()));
-        return "/admin/index";
+        model.addAttribute("roleList", roleService.findAll());
+        model.addAttribute("newUser", new User());
+        return "admin-panel";
     }
 
     @GetMapping("/new")
