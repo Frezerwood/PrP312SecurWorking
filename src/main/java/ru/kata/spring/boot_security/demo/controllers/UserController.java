@@ -22,9 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("")
     public String userPage(Principal principal, Model model) {
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
-        return "/user";
+        model.addAttribute("userAuthority", userService.findByUsername(principal.getName()));
+        return "/user/user";
     }
 }
