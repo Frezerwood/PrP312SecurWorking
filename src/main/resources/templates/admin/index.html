@@ -12,8 +12,8 @@
 
 <nav class="navbar navbar-dark bg-dark">
     <h5>
-        <div class="navbar-text text-white font-bold" th:text="${userAuth.email}">Email</div>
-        <th:block th:object="${userAuth}">
+        <div class="navbar-text text-white font-bold" th:text="${userAuthority.lastName}">Email</div>
+        <th:block th:object="${userAuthority}">
             <ui class="text-white text-muted">with roles:</ui>
             <ui class="text-white font-bold"
                 th:each="role : *{roles}" th:text="${role.name.substring(5)} + ' '">Role</ui>
@@ -45,7 +45,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="usersTab" data-toggle="tab" href="#users" role="tab"
                        aria-controls="users" aria-selected="true">
-                        Users table
+                        Users info
                     </a>
                 </li>
                 <li class="nav-item">
@@ -62,8 +62,8 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
+                            <th>Surname</th>
                             <th>Age</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -74,8 +74,8 @@
                         <tbody>
                         <tr th:each ="user : ${users}">
                             <td th:text="${user.id}">ID</td>
-                            <td th:text="${user.name}">First Name</td>
-                            <td th:text="${user.surname}">Last Name</td>
+                            <td th:text="${user.firstName}">Name</td>
+                            <td th:text="${user.lastName}">Surname</td>
                             <td th:text="${user.age}">Age</td>
                             <td th:text="${user.email}">Email</td>
                             <td>
@@ -120,20 +120,20 @@
                                                            th:placeholder="${user.id}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
-                                                    <label for="nameEdit" class="col-form-label">First name</label>
+                                                    <label for="nameEdit" class="col-form-label">Name</label>
                                                     <input class="form-control"
                                                            type="text"
                                                            id="nameEdit"
                                                            name="name"
-                                                           th:value="${user.name}"/>
+                                                           th:value="${user.firstName}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
-                                                    <label for="surnameEdit" class="col-form-label">Last name</label>
+                                                    <label for="surnameEdit" class="col-form-label">Surname</label>
                                                     <input class="form-control"
                                                            type="text"
                                                            id="surnameEdit"
                                                            name="surname"
-                                                           th:value="${user.surname}"/>
+                                                           th:value="${user.lastName}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
                                                     <label for="ageEdit" class="col-form-label">Age</label>
@@ -200,20 +200,20 @@
                                                            th:placeholder="${user.id}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
-                                                    <label for="nameDelete" class="col-form-label">First name</label>
+                                                    <label for="nameDelete" class="col-form-label">Name</label>
                                                     <input class="form-control"
                                                            readonly
                                                            type="text"
                                                            id="nameDelete"
-                                                           th:placeholder="${user.name}"/>
+                                                           th:placeholder="${user.firstName}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
-                                                    <label for="surnameDelete" class="col-form-label">Last name</label>
+                                                    <label for="surnameDelete" class="col-form-label">Surname</label>
                                                     <input class="form-control"
                                                            readonly
                                                            type="text"
                                                            id="surnameDelete"
-                                                           th:placeholder="${user.surname}"/>
+                                                           th:placeholder="${user.lastName}"/>
                                                 </div>
                                                 <div class="form-group font-weight-bold">
                                                     <label for="ageDelete" class="col-form-label">Age</label>
@@ -267,11 +267,11 @@
                                       th:action="@{/admin}"
                                       th:object="${user}">
                                     <div class="form-group font-weight-bold">
-                                        <label for="nameNew" class="col-form-label">First name</label>
+                                        <label for="nameNew" class="col-form-label">Name</label>
                                         <input type="text" class="form-control" id="nameNew" name="name"/>
                                     </div>
                                     <div class="form-group font-weight-bold">
-                                        <label for="surnameNew" class="col-form-label">Last name</label>
+                                        <label for="surnameNew" class="col-form-label">Surname</label>
                                         <input type="text" class="form-control" id="surnameNew" name="surname"/>
                                     </div>
                                     <div class="form-group font-weight-bold">

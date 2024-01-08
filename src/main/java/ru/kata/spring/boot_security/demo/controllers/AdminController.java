@@ -9,6 +9,8 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -24,9 +26,10 @@ public class AdminController {
     }
 
     @GetMapping
-    public String userList(Model model) {
+    public String userList(Model model, Principal principal) {
         model.addAttribute("users", userService.findAll());
-        return "admin";
+        model.addAttribute("userAuthority",userService.findByUsername(principal.getName()));
+        return "/admin/index";
     }
 
     @GetMapping("/createUser")
