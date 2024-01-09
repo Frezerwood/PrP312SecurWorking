@@ -12,15 +12,17 @@
 </head>
 <body>
 
-<header>
+<header> <!--Names, Roles and Logout -->
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid text-white">
             <span class="navbar-header">
-                <span th:text="${user.getLastName()}"></span>
+                <span th:text="${user.getLastName().toUpperCase()}"></span>
                 <span> with roles: </span>
-                <span th:each="role : ${roleList}"
-                      th:text="${role.name.substring(5) + '  '}">
-                </span>
+                 <span class="font-weight-light">
+                <th:block
+                        th:text="'with roles: '+ ${user.getRoles()}">
+                </th:block>
+            </span>
             </span>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -31,26 +33,26 @@
     </nav>
 </header>
 
-</div> <!--Шапка с Email, Ролями и кнопкой Logout -->
 <br>
+
 <div class="d-flex align-items-start">
-  <div class="col-2 m-0 p-0"> <!-- NAV BAR синенькие вкладки слева ADMIN и USER  -->
+  <div class="col-2 m-0 p-0"> <!-- BLUE NAV BAR ADMIN and USER  -->
     <div class="nav flex-column nav-pills me-3" id="Left-menu" role="tablist" aria-orientation="vertical">
       <a class="nav-link active" id="Admin-pills-tab" data-bs-toggle="pill" href="#Admin-pills"
-         role="tab" aria-controls="Admin-pills-home" aria-selected="true">Admin</a>   <!-- админ  -->
+         role="tab" aria-controls="Admin-pills-home" aria-selected="true">Admin</a>   <!-- AD  -->
       <a class="nav-link" id="User-pills-tab" data-bs-toggle="pill" href="#User-pills"
-         role="tab" aria-controls="User-pills-home" aria-selected="false">User</a>    <!-- юзер  -->
+         role="tab" aria-controls="User-pills-home" aria-selected="false">User</a>    <!-- US  -->
     </div>
   </div>
-  <div class="col-10 m-0 "> <!-- Контент справа  -->
-    <div class="tab-content container-fluid" id="Left-menuContent"> <!-- вкладки с контентом  -->
+  <div class="col-10 m-0 "> <!-- RIGHT BLOCK  -->
+    <div class="tab-content container-fluid" id="Left-menuContent">
 
       <div class="tab-pane fade show active" id="Admin-pills"
-           role="tabpanel" aria-labelledby="Admin-pills-tab"> <!-- Вкладка Админа  -->
+           role="tabpanel" aria-labelledby="Admin-pills-tab"> <!-- ADMIN TAB  -->
         <div class="h1">Admin panel</div>
         <br>
         <nav class="nav nav-tabs" id="nav-tab" role="tablist">
-          <!-- Страницы с админ таблицей И создание юзеров -->
+          <!-- _________ -->
           <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home"
              role="tab" aria-controls="nav-home" aria-selected="true">
             Users Table</a>
@@ -60,7 +62,7 @@
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home"
                role="tabpanel" aria-labelledby="nav-home-tab">
-            <!--Страница с таблицей для админа -->
+            <!--Admin table -->
             <div class="card">
               <div class="card-header h5">
                 All Users
@@ -87,24 +89,24 @@
                     <td th:text="${user.getAge()}"></td>
                     <td th:text="${user.getEmail()}"></td>
                     <td th:text="${user.getRoles()}"></td>
-                    <td> <!-- Кнопка Edit. Открывает модальное окно modalEdit{id}  -->
+                    <td> <!-- Edit button  -->
                       <button type="button" class="btn btn-success" data-bs-toggle="modal"
                               th:data-bs-target="${'#modalEdit'+user.getId()}">Edit
                       </button>
                     </td>
-                    <td> <!-- Кнопка Delete. Открывает модальное окно modalDelete{id}  -->
+                    <td> <!-- Delete button  -->
                       <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                               th:data-bs-target="${'#modalDelete'+user.getId()}">Delete
                       </button>
                     </td>
                     <div class="modal fade" th:id="${'modalEdit'+user.getId()}">
-                      <!-- Наполнение кнопки Edit, описание модального окна -->
+                      <!-- Edit button content -->
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <form id="formEdit" th:method="PATCH"
                                 th:action="@{admin/edit/{id} (id=${user.id})}"
                                 th:object="${user}">
-                            <div class="modal-header"> <!-- Шапка модального окна -->
+                            <div class="modal-header"> <!-- Header modal window -->
                               <h5 class="modal-title"
                                   id="modalVerticallyCenteredLabel1">
                                 Edit user</h5>
@@ -164,7 +166,7 @@
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <!-- Кнопки отмена и подтверждения формы -->
+                              <!-- Some buttons -->
                               <button type="button" class="btn btn-secondary"
                                       data-bs-dismiss="modal">Close
                               </button>
@@ -177,13 +179,13 @@
                       </div>
                     </div>
                     <div class="modal fade" th:id="${'modalDelete'+user.getId()}">
-                      <!-- Наполнение кнопки Delete, описание модального окна -->
+                      <!-- Delete button content -->
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <form id="formDelete" th:method="GET"
                                 th:action="@{admin/delete/{id} (id=${user.id})}"
                                 th:object="${user}">
-                            <div class="modal-header"> <!-- Шапка модального окна -->
+                            <div class="modal-header"> <!-- _____________ -->
                               <h5 class="modal-title"
                                   id="modalVerticallyCenteredLabel2">
                                 Delete user</h5>
@@ -236,7 +238,7 @@
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <!-- Кнопки отмена и подтверждения формы -->
+                              <!-- ________________________ -->
                               <button type="button" class="btn btn-secondary"
                                       data-bs-dismiss="modal">Close
                               </button>
@@ -256,7 +258,9 @@
           </div>
           <div class="tab-pane fade" id="nav-profile"
                role="tabpanel" aria-labelledby="nav-profile-tab">
-            <!--Страница создания юзера -->
+
+            <!--User page -->
+
             <div class="card">
               <div class="card-header h5">
                 Add new user
@@ -309,7 +313,7 @@
                         </select>
                         <br>
                         <div>
-                          <!-- Кнопка подтверждения формы -->
+                          <!-- Submit button -->
                           <button type="submit" class="btn btn-success">Add new user
                           </button>
                         </div>
@@ -323,14 +327,14 @@
         </div>
       </div>
       <div class="tab-pane fade" id="User-pills"
-           role="tabpanel" aria-labelledby="User-pills-tab"> <!-- Вкладка Юзера  -->
+           role="tabpanel" aria-labelledby="User-pills-tab"> <!-- User Tab  -->
         <div class="h1">User information-page</div>
         <br>
-        <div class="card"> <!-- Таблица справа  -->
+        <div class="card"> <!-- __________  -->
           <div class="card-header h5">
             About User
-          </div> <!-- Название таблицы справа  -->
-          <div class="card-body"> <!-- Наполнение таблицы справа  -->
+          </div> <!-- ___________  -->
+          <div class="card-body"> <!-- _____________  -->
             <table class="table table-striped">
               <thead>
               <tr>

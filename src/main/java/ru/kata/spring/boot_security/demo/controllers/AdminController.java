@@ -31,7 +31,7 @@ public class AdminController {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("roleList", roleService.findAll());
         model.addAttribute("newUser", new User());
-        return "admin-panel";
+        return "admin";
     }
 
 //    @GetMapping("/new")
